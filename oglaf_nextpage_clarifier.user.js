@@ -15,4 +15,4 @@ if (!window.jQuery)
 	document.getElementsByTagName('head')[0].appendChild(script);
 	neededJQuery = true;
 }
-alert("hello, world! (also i have jquery)");
+alert("hello, world! (this is an update via the github webhook)");
