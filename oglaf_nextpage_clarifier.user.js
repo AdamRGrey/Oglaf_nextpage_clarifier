@@ -1,19 +1,30 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name        oglaf NextPage clarifier
 // @namespace   https://greasyfork.org/users/2226-adam
 // @description Oglaf has stories which may have 1 or more pages. The "Next Page" button takes you to the next story if there isn't a next page, which is a bit unclear.
 // @include     htt*://oglaf.com/*
-// @version     0.1.1
+// @version     0.1.3
 // @grant       none
-// @downloadURL https://greasyfork.org/scripts/5750-oglaf-nextpage-clarifier/code/oglaf%20NextPage%20clarifier.user.js
+// @require     http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // ==/UserScript==
-
-if (!window.jQuery) 
+function main()
 {
-	var script = document.createElement('script');
-	script.src = 'http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js';
-	script.type = 'text/javascript';
-	document.getElementsByTagName('head')[0].appendChild(script);
-	neededJQuery = true;
+	var navlinks = $('[id=nav]');
+	var nextPageLink = navlinks.children()[2];
+	var nextStoryLink = navlinks.children()[4];
+	if(nextPageLink.href == nextStoryLink.href)
+	{
+		alert("this story has no more pages!");
+		var NoNextPageElm = document.createElement('div');
+		NoNextPageElm.id="nnx";
+		NoNextPageElm.className="nav_ro";
+		nextPageLink.parentNode.replaceChild(NoNextPageElm, nextPageLink);
+	}
+	else
+	{
+		alert("this story has more pages!")
+	}
 }
-alert("hello, world! (this is an update via the github webhook)");
+$(document).ready(main);
+
+//alert(navlinks);
